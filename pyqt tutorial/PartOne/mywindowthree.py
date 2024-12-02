@@ -1,10 +1,10 @@
-from PyQt6.QtWidgets import QApplication, QWidget
+from PyQt6.QtWidgets import QDialog, QApplication
 
 import sys
 
 app = QApplication(sys.argv)
 
-window = QWidget()
+window = QDialog()
 
 window.show()
 

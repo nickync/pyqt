@@ -1,4 +1,4 @@
-from PyQt6.QtWidgets import QApplication, QWidget, QMainWindow, QTreeView, QTableWidget, QTableWidgetItem, QTabWidget, QLineEdit, QVBoxLayout
+from PyQt6.QtWidgets import QApplication, QWidget, QMainWindow, QTreeView, QTableWidget, QTableWidgetItem, QTabWidget, QLineEdit, QVBoxLayout, QMenu
 from PyQt6.QtGui import QStandardItem, QStandardItemModel, QAction, QKeySequence
 from PyQt6.QtCore import Qt, QMimeData
 import sys
@@ -71,7 +71,7 @@ class Window(QMainWindow):
                 for col in range(selection_range.leftColumn(), selection_range.rightColumn() + 1):
                     item = self.table_widget.item(row, col)
                     if item:
-                        cells_text.append(item)
+                        cells_text.append(item.text())
 
 
         mimeData = QMimeData()
@@ -101,6 +101,12 @@ class Window(QMainWindow):
                             item.setText(cells_text.pop(0))
                         else:
                             return
+                        
+    def contextMenuEvent(self, event):
+        context_menu = QMenu()
+        context_menu.addAction(self.copy_action)
+        context_menu.addAction(self.paste_action)
+        context_menu.exec(event.globalPos())
 
 
     def setup_connection(self):

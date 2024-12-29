@@ -1,8 +1,9 @@
-from PyQt6.QtWidgets import QMainWindow, QApplication, QFileDialog, QMessageBox
+from PyQt6.QtWidgets import QMainWindow, QApplication, QFileDialog, QMessageBox, QFontDialog, QColorDialog
 import sys
 from Notepad import Ui_MainWindow
 from PyQt6.QtPrintSupport import QPrinter, QPrintDialog, QPrintPreviewDialog
-from PyQt6.QtCore import QFileInfo
+from PyQt6.QtCore import QFileInfo, Qt
+from PyQt6.QtGui import QFont
 
 
 class NotePadWindow(QMainWindow, Ui_MainWindow):
@@ -17,6 +18,15 @@ class NotePadWindow(QMainWindow, Ui_MainWindow):
         self.actionPrint.triggered.connect(self.print_file)
         self.actionPrint_Preview.triggered.connect(self.preview_dialog)
         self.actionExport_PDF.triggered.connect(self.export_pdf)
+
+        self.actionBold.triggered.connect(self.text_bold)
+        self.actionItalics.triggered.connect(self.text_italic)
+        self.actionUnderline.triggered.connect(self.text_underline)
+        self.actionAlign_center.triggered.connect(self.align_center)
+        self.actionAlign_left.triggered.connect(self.align_left)
+        self.actionFont.triggered.connect(self.font_dialog)
+        self.actionColor.triggered.connect(self.color_dialog)
+        self.actionAbout_App.triggered.connect(self.about)
 
     def maybe_save(self):
         if not self.textEdit.document().isModified():
@@ -86,8 +96,43 @@ class NotePadWindow(QMainWindow, Ui_MainWindow):
             printer.setOutputFileName(fn)
             self.textEdit.document().print(printer)
 
+    def exit_app(self):
+        self.close()
 
+    def text_bold(self):
+        font = QFont()
+        font.setBold(True)
+        self.textEdit.setFont(font)
 
+    def text_italic(self):
+        font = QFont()
+        font.setItalic(True)
+        if self.textEdit.font().bold():
+            font.setBold(True)
+        self.textEdit.setFont(font)
+
+    def text_underline(self):
+        font = QFont()
+        font.setUnderline(True)
+        self.textEdit.setFont(font)       
+
+    def align_left(self):
+        self.textEdit.setAlignment(Qt.AlignmentFlag.AlignLeft)
+
+    def align_center(self):
+        self.textEdit.setAlignment(Qt.AlignmentFlag.AlignCenter)
+
+    def font_dialog(self):
+        font, ok = QFontDialog.getFont()
+        if ok:
+            self.textEdit.setFont(font)
+
+    def color_dialog(self):
+        color = QColorDialog.getColor()
+        self.textEdit.setTextColor(color)
+
+    def about(self):
+        QMessageBox.about(self, 'About App', 'Simple notebook with PyQt6')
 
 
 app = QApplication(sys.argv)

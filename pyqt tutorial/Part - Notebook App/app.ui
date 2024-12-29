@@ -20,7 +20,7 @@
       <x>0</x>
       <y>0</y>
       <width>721</width>
-      <height>381</height>
+      <height>431</height>
      </rect>
     </property>
     <property name="layoutDirection">
@@ -69,6 +69,12 @@
     <addaction name="actionBold"/>
     <addaction name="actionItalics"/>
     <addaction name="actionUnderline"/>
+    <addaction name="separator"/>
+    <addaction name="actionAlign_left"/>
+    <addaction name="actionAlign_center"/>
+    <addaction name="separator"/>
+    <addaction name="actionFont"/>
+    <addaction name="actionColor"/>
    </widget>
    <widget class="QMenu" name="menuAbout">
     <property name="title">
@@ -193,6 +199,26 @@
   <action name="actionAbout_App">
    <property name="text">
     <string>About App</string>
+   </property>
+  </action>
+  <action name="actionAlign_left">
+   <property name="text">
+    <string>Align left</string>
+   </property>
+  </action>
+  <action name="actionAlign_center">
+   <property name="text">
+    <string>Align center</string>
+   </property>
+  </action>
+  <action name="actionFont">
+   <property name="text">
+    <string>Font</string>
+   </property>
+  </action>
+  <action name="actionColor">
+   <property name="text">
+    <string>Color</string>
    </property>
   </action>
  </widget>

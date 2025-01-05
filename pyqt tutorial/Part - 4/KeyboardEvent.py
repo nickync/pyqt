@@ -11,7 +11,7 @@ class Window(QMainWindow):
         self.setGeometry(600, 200, 700, 400)
         self.setWindowTitle('Keyboard event')
 
-        self.label = QLabel('Key handling event', self)
+        self.label = QLabel('Key handling event - use Arrows -> <-', self)
         self.label.setFont(QFont('Times New Roman'))
         self.label.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.setCentralWidget(self.label)

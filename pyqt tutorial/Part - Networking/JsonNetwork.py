@@ -41,8 +41,8 @@ class Window(QWidget):
             json_data = json.loads(data)
             self.text_edit.append('Received JSON Data : ')
             for item in json_data:
-                self.text_edit.append(f'Title : {item['title']}')
-                self.text_edit.append(f'Body : {item['body']}')
+                self.text_edit.append(f"Title : {item['title']}")
+                self.text_edit.append(f"Body : {item['body']}")
                 self.text_edit.append('-------------------')
 
 

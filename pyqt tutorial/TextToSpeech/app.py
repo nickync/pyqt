@@ -1,5 +1,5 @@
 from PyQt6.QtCore import Qt
-from PyQt6.QtWidgets import QApplication, QPushButton, QVBoxLayout, QWidget, QLineEdit, QHBoxLayout, QComboBox, QLabel
+from PyQt6.QtWidgets import QApplication, QPushButton, QVBoxLayout, QWidget, QLineEdit, QHBoxLayout, QComboBox, QLabel, QSlider
 from PyQt6.QtTextToSpeech import QTextToSpeech
 import sys
 
@@ -31,6 +31,16 @@ class Window(QWidget):
 
         vbox.addLayout(hbox2)
 
+        hbox3 = QHBoxLayout()
+        hbox3.addWidget(QLabel('Volumn :'))
+
+        self.slider = QSlider()
+        self.slider.setRange(0, 100)
+        self.slider.setOrientation(Qt.Orientation.Horizontal)
+        hbox3.addWidget(self.slider)
+
+        vbox.addLayout(hbox3)
+
         self.setLayout(vbox)
 
         self.engine = None
@@ -56,7 +66,7 @@ class Window(QWidget):
     def say(self):
         self.button.setEnabled(False)
         self.engine.setVoice(self.voices[self.comboBox.currentIndex()])
-        #self.engine.setVoice(float(self.ui.horizontalSlier).value()/100)
+        self.engine.setVolume(float(self.slider.value()/100))
         self.engine.say(self.text.text())
 
 

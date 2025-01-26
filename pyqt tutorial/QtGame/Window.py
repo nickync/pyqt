@@ -6,6 +6,7 @@ from Enemy import Enemy
 from Score import Score
 from Health import Health
 from PyQt6.QtMultimedia import QMediaPlayer, QAudioOutput
+from PyQt6.QtGui import QPixmap
 
 class Window(QGraphicsView):
     def __init__(self):
@@ -13,11 +14,15 @@ class Window(QGraphicsView):
         self.setGeometry(0 ,0, 800, 600)
         self.scene = QGraphicsScene()
 
+        self.setStyleSheet('background-color:#8b624c')
+
         #rect = QGraphicsRectItem()
         #rect.setRect(0, 0, 100, 100)
 
         self.player = Player()
-        self.player.setRect(0, 0, 100, 100)
+        #self.player.setRect(0, 0, 100, 100)
+        self.player.setPixmap(QPixmap('QtGame/player.png'))
+
         self.scene.addItem(self.player)
 
         self.setScene(self.scene)
@@ -31,11 +36,11 @@ class Window(QGraphicsView):
         #self.setVerticalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
         self.setFixedSize(800, 600)
         self.scene.setSceneRect(0, 0, 800, 600)
-        self.player.setPos(self.scene.width()/2 - self.player.rect().width()/2, self.scene.height() - self.player.rect().height())
+        self.player.setPos(self.scene.width()/2 - self.player.pixmap().width()/2, self.scene.height() - self.player.pixmap().height())
 
         self.timer = QTimer()
-        self.timer.timeout.connect(self.spawn_enemy)
-        self.timer.start(3000)
+        self.timer.timeout.connect(self.spawn_enemy) 
+        self.timer.start(1000)
 
         # score
         self.score = Score()

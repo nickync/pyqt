@@ -10,7 +10,7 @@ class Score(QGraphicsTextItem):
         self.score = 0
 
         self.setPlainText('Score : ' + str(self.score))
-        self.setDefaultTextColor(Qt.GlobalColor.red)
+        self.setDefaultTextColor(Qt.GlobalColor.black)
         self.setFont(QFont('Times New Roman', 20))
 
     def increase(self, points=1):

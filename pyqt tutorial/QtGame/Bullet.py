@@ -1,13 +1,16 @@
-from PyQt6.QtWidgets import QGraphicsRectItem
+from PyQt6.QtWidgets import QGraphicsRectItem, QGraphicsPixmapItem
 from PyQt6.QtCore import QTimer
 from Enemy import Enemy
 from Score import Score
+from PyQt6.QtGui import QPixmap
 
-class Bullet(QGraphicsRectItem):
+#class Bullet(QGraphicsRectItem):
+class Bullet(QGraphicsPixmapItem):
     def __init__(self):
         super().__init__()
 
-        self.setRect(0, 0, 10, 50)
+        #self.setRect(0, 0, 10, 50)
+        self.setPixmap(QPixmap('QtGame/bullet.png'))
 
         self.timer = QTimer()
 
@@ -22,7 +25,7 @@ class Bullet(QGraphicsRectItem):
 
         for item in colliding_items:
             if isinstance(item, Enemy):
-                
+
                 for scene_item in self.scene().items():
                     if isinstance(scene_item, Score):
                         scene_item.increase()
@@ -40,6 +43,6 @@ class Bullet(QGraphicsRectItem):
 
             return
         
-        if self.y() + self.rect().height() < 0:
+        if self.y() + self.pixmap().height() < 0:
             self.scene().removeItem(self)
             self.timer.stop()

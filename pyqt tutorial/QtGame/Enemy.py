@@ -1,10 +1,11 @@
 from PyQt6.QtCore import QTimer
-from PyQt6.QtWidgets import QGraphicsRectItem
+from PyQt6.QtWidgets import QGraphicsRectItem, QGraphicsPixmapItem
+from PyQt6.QtGui import QPixmap
 from random import randint
 
 from Health import Health
 
-class Enemy(QGraphicsRectItem):
+class Enemy(QGraphicsPixmapItem):
 
     def __init__(self):
         super().__init__()
@@ -13,7 +14,8 @@ class Enemy(QGraphicsRectItem):
 
         self.setPos(random_number, 0)
 
-        self.setRect(0, 0, 100, 100)
+        #self.setRect(0, 0, 100, 100)
+        self.setPixmap(QPixmap('QtGame/enemy.png'))
 
         self.timer = QTimer()
         self.timer.timeout.connect(self.move)
@@ -22,7 +24,7 @@ class Enemy(QGraphicsRectItem):
     def move(self):
         self.setPos(self.x(), self.y() + 5)
 
-        if self.pos().y() + self.rect().height() < 0:
+        if self.pos().y() + self.pixmap().height() < 0:
             self.scene().removeItem(self)
             print('Deleted')
 
